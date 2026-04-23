@@ -1,106 +1,59 @@
 ---
 name: using-git-worktrees
-description: Use when starting feature work that needs isolation from current workspace or before executing implementation plans - creates isolated git worktrees with smart directory selection and safety verification
+description: Use when starting implementation work in a single-owner repository where changes should stay on main/master rather than branches or PRs
 ---
 
-# Using Git Worktrees
+# Using the Current Main/Master Workspace
+
+This skill keeps its historical name for compatibility. In this fork, it does **not** create git worktrees or branches.
 
 ## Overview
 
-Git worktrees create isolated workspaces sharing the same repository, allowing work on multiple branches simultaneously without switching.
+Single-owner work happens directly on `main` or `master`.
 
-**Core principle:** Systematic directory selection + safety verification = reliable isolation.
+**Core principle:** Verify current workspace state + baseline tests = ready to edit.
 
-**Announce at start:** "I'm using the using-git-worktrees skill to set up an isolated workspace."
+**Announce at start:** "I'm using the workspace setup skill to verify the current main/master workspace."
 
-## Directory Selection Process
+## The Process
 
-Follow this priority order:
-
-### 1. Check Existing Directories
+### Step 1: Confirm Current Branch
 
 ```bash
-# Check in priority order
-ls -d .worktrees 2>/dev/null     # Preferred (hidden)
-ls -d worktrees 2>/dev/null      # Alternative
+BRANCH=$(git branch --show-current)
 ```
 
-**If found:** Use that directory. If both exist, `.worktrees` wins.
+**If on `main` or `master`:** Continue.
 
-### 2. Check CLAUDE.md
+**If detached HEAD or another branch:**
+
+```
+Current branch is <branch-or-detached>. This single-owner workflow works directly on main/master and does not create branches.
+
+Should I switch to main/master before continuing?
+```
+
+Stop until the human partner confirms. Do not create a branch.
+
+### Step 2: Check Workspace State
 
 ```bash
-grep -i "worktree.*director" CLAUDE.md 2>/dev/null
+git status --short
 ```
 
-**If preference specified:** Use it without asking.
+**If clean:** Continue.
 
-### 3. Ask User
+**If dirty:** Read the diff and identify whether changes are related to this task.
 
-If no directory exists and no CLAUDE.md preference:
+- Related changes: work with them.
+- Unrelated changes: leave them alone and avoid staging them.
+- Unclear ownership: ask before touching or staging them.
 
-```
-No worktree directory found. Where should I create worktrees?
+Never discard, reset, or overwrite existing work without explicit instruction.
 
-1. .worktrees/ (project-local, hidden)
-2. ~/.config/superpowers/worktrees/<project-name>/ (global location)
+### Step 3: Run Project Setup
 
-Which would you prefer?
-```
-
-## Safety Verification
-
-### For Project-Local Directories (.worktrees or worktrees)
-
-**MUST verify directory is ignored before creating worktree:**
-
-```bash
-# Check if directory is ignored (respects local, global, and system gitignore)
-git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/dev/null
-```
-
-**If NOT ignored:**
-
-Per Jesse's rule "Fix broken things immediately":
-1. Add appropriate line to .gitignore
-2. Commit the change
-3. Proceed with worktree creation
-
-**Why critical:** Prevents accidentally committing worktree contents to repository.
-
-### For Global Directory (~/.config/superpowers/worktrees)
-
-No .gitignore verification needed - outside project entirely.
-
-## Creation Steps
-
-### 1. Detect Project Name
-
-```bash
-project=$(basename "$(git rev-parse --show-toplevel)")
-```
-
-### 2. Create Worktree
-
-```bash
-# Determine full path
-case $LOCATION in
-  .worktrees|worktrees)
-    path="$LOCATION/$BRANCH_NAME"
-    ;;
-  ~/.config/superpowers/worktrees/*)
-    path="~/.config/superpowers/worktrees/$project/$BRANCH_NAME"
-    ;;
-esac
-
-# Create worktree with new branch
-git worktree add "$path" -b "$BRANCH_NAME"
-cd "$path"
-```
-
-### 3. Run Project Setup
-
-Auto-detect and run appropriate setup:
+Auto-detect and run appropriate setup if dependencies may be missing:
 
 ```bash
 # Node.js
@@ -117,9 +70,11 @@ if [ -f pyproject.toml ]; then poetry install; fi
 if [ -f go.mod ]; then go mod download; fi
 ```
 
-### 4. Verify Clean Baseline
+Skip setup when the project is already configured and there is no reason to reinstall.
 
-Run tests to ensure worktree starts clean:
+### Step 4: Verify Clean Baseline
+
+Run tests before editing so new failures are distinguishable from existing failures:
 
 ```bash
 # Examples - use project-appropriate command
@@ -129,14 +84,14 @@ pytest
 go test ./...
 ```
 
-**If tests fail:** Report failures, ask whether to proceed or investigate.
+**If tests fail:** Report failures and ask whether to investigate before implementing.
 
 **If tests pass:** Report ready.
 
-### 5. Report Location
+### Step 5: Report State
 
 ```
-Worktree ready at <full-path>
+Workspace ready on <main-or-master>
 Tests passing (<N> tests, 0 failures)
 Ready to implement <feature-name>
 ```
@@ -145,65 +100,51 @@ Ready to implement <feature-name>
 
 | Situation | Action |
 |-----------|--------|
-| `.worktrees/` exists | Use it (verify ignored) |
-| `worktrees/` exists | Use it (verify ignored) |
-| Both exist | Use `.worktrees/` |
-| Neither exists | Check CLAUDE.md → Ask user |
-| Directory not ignored | Add to .gitignore + commit |
+| On `main` or `master` | Continue |
+| On another branch | Ask before switching; do not create a branch |
+| Detached HEAD | Ask how to get back to main/master |
+| Dirty workspace | Inspect and preserve existing work |
 | Tests fail during baseline | Report failures + ask |
 | No package.json/Cargo.toml | Skip dependency install |
 
 ## Common Mistakes
 
-### Skipping ignore verification
+### Creating isolation that this fork does not use
 
-- **Problem:** Worktree contents get tracked, pollute git status
-- **Fix:** Always use `git check-ignore` before creating project-local worktree
+- **Problem:** Branches and worktrees add process overhead for this single-owner workflow.
+- **Fix:** Work directly on `main` or `master`.
 
-### Assuming directory location
+### Staging unrelated changes
 
-- **Problem:** Creates inconsistency, violates project conventions
-- **Fix:** Follow priority: existing > CLAUDE.md > ask
+- **Problem:** Existing local work gets bundled into the current task.
+- **Fix:** Inspect `git status` and stage only task-related files.
 
 ### Proceeding with failing tests
 
-- **Problem:** Can't distinguish new bugs from pre-existing issues
-- **Fix:** Report failures, get explicit permission to proceed
+- **Problem:** Can't distinguish new bugs from pre-existing issues.
+- **Fix:** Report failures, get explicit permission to proceed.
 
-### Hardcoding setup commands
+### Pushing or opening PRs
 
-- **Problem:** Breaks on projects using different tools
-- **Fix:** Auto-detect from project files (package.json, etc.)
-
-## Example Workflow
-
-```
-You: I'm using the using-git-worktrees skill to set up an isolated workspace.
-
-[Check .worktrees/ - exists]
-[Verify ignored - git check-ignore confirms .worktrees/ is ignored]
-[Create worktree: git worktree add .worktrees/auth -b feature/auth]
-[Run npm install]
-[Run npm test - 47 passing]
-
-Worktree ready at /Users/jesse/myproject/.worktrees/auth
-Tests passing (47 tests, 0 failures)
-Ready to implement auth feature
-```
+- **Problem:** Publishing is not part of the default local workflow.
+- **Fix:** Commit locally only. Push only when explicitly requested. Do not create PRs.
 
 ## Red Flags
 
 **Never:**
-- Create worktree without verifying it's ignored (project-local)
+- Create a branch
+- Create a worktree
+- Open a PR
+- Push by default
 - Skip baseline test verification
 - Proceed with failing tests without asking
-- Assume directory location when ambiguous
-- Skip CLAUDE.md check
+- Discard or stage unrelated work
 
 **Always:**
-- Follow directory priority: existing > CLAUDE.md > ask
-- Verify directory is ignored for project-local
-- Auto-detect and run project setup
+- Work directly on `main` or `master`
+- Check current branch before editing
+- Inspect workspace status
+- Auto-detect project setup when needed
 - Verify clean test baseline
 
 ## Integration
@@ -212,7 +153,7 @@ Ready to implement auth feature
 - **brainstorming** (Phase 4) - REQUIRED when design is approved and implementation follows
 - **subagent-driven-development** - REQUIRED before executing any tasks
 - **executing-plans** - REQUIRED before executing any tasks
-- Any skill needing isolated workspace
+- Any skill needing current workspace verification
 
 **Pairs with:**
-- **finishing-a-development-branch** - REQUIRED for cleanup after work complete
+- **finishing-a-development-branch** - REQUIRED for final verification and local commit handling

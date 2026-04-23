@@ -1,6 +1,6 @@
 ---
 name: requesting-code-review
-description: Use when completing tasks, implementing major features, or before merging to verify work meets requirements
+description: Use when completing tasks, implementing major features, or before final local commit to verify work meets requirements
 ---
 
 # Requesting Code Review
@@ -14,7 +14,7 @@ Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 **Mandatory:**
 - After each task in subagent-driven development
 - After completing major feature
-- Before merge to main
+- Before final local commit on main/master
 
 **Optional but valuable:**
 - When stuck (fresh perspective)
@@ -86,7 +86,7 @@ You: [Fix progress indicators]
 - Get feedback, apply, continue
 
 **Ad-Hoc Development:**
-- Review before merge
+- Review before final local commit
 - Review when stuck
 
 ## Red Flags

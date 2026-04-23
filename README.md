@@ -120,7 +120,7 @@ gemini extensions update superpowers
 
 1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
 
-2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+2. **using-git-worktrees** - Activates after design approval. Verifies the current `main`/`master` workspace, runs project setup, verifies clean test baseline.
 
 3. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
 
@@ -130,7 +130,7 @@ gemini extensions update superpowers
 
 6. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
 
-7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
+7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, reviews the diff, commits locally on `main`/`master`.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
@@ -152,8 +152,8 @@ gemini extensions update superpowers
 - **dispatching-parallel-agents** - Concurrent subagent workflows
 - **requesting-code-review** - Pre-review checklist
 - **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
-- **finishing-a-development-branch** - Merge/PR decision workflow
+- **using-git-worktrees** - Current `main`/`master` workspace verification
+- **finishing-a-development-branch** - Local commit completion workflow
 - **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
 
 **Meta**
@@ -173,11 +173,10 @@ Read [the original release announcement](https://blog.fsck.com/2025/10/09/superp
 
 The general contribution process for Superpowers is below. Keep in mind that we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.
 
-1. Fork the repository
-2. Switch to the 'dev' branch
-3. Create a branch for your work
-4. Follow the `writing-skills` skill for creating and testing new and modified skills
-5. Submit a PR, being sure to fill in the pull request template.
+1. Work directly on `main` or `master`
+2. Follow the `writing-skills` skill for creating and testing new and modified skills
+3. Commit verified changes locally
+4. Do not create branches or PRs.
 
 See `skills/writing-skills/SKILL.md` for the complete guide.
 
