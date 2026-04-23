@@ -136,12 +136,18 @@ fi
 
 echo ""
 
-# Test 8: Verify worktree requirement
-echo "Test 8: Worktree requirement..."
+# Test 8: Verify direct main/master workspace requirement
+echo "Test 8: Direct main/master workspace..."
 
-output=$(run_claude "What workflow skills are required before using subagent-driven-development? List any prerequisites or required skills." 30)
+output=$(run_claude "What workflow setup is required before using subagent-driven-development? Should it create a branch/worktree, or work directly on main/master?" 30)
 
-if assert_contains "$output" "using-git-worktrees\|worktree" "Mentions worktree requirement"; then
+if assert_contains "$output" "main\|master\|current.*workspace\|direct" "Mentions direct main/master workflow"; then
+    : # pass
+else
+    exit 1
+fi
+
+if assert_not_contains "$output" "create.*branch\|new.*branch\|feature.*branch\|git worktree add\|isolated.*worktree" "Doesn't require branch/worktree creation"; then
     : # pass
 else
     exit 1
@@ -149,12 +155,17 @@ fi
 
 echo ""
 
-# Test 9: Verify main branch warning
-echo "Test 9: Main branch red flag..."
+# Test 9: Verify main/master is allowed
 
 output=$(run_claude "In subagent-driven-development, is it okay to start implementation directly on the main branch?" 30)
 
-if assert_contains "$output" "worktree\|feature.*branch\|not.*main\|never.*main\|avoid.*main\|don't.*main\|consent\|permission" "Warns against main branch"; then
+if assert_contains "$output" "yes\|okay\|direct\|main\|master" "Allows direct main/master work"; then
+    : # pass
+else
+    exit 1
+fi
+
+if assert_not_contains "$output" "not.*main\|never.*main\|avoid.*main\|don't.*main\|consent\|permission\|feature.*branch\|worktree" "Doesn't warn against main branch"; then
     : # pass
 else
     exit 1
