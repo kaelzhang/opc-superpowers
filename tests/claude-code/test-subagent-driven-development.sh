@@ -173,4 +173,42 @@ fi
 
 echo ""
 
+# Test 10: Verify code organization guidance
+echo "Test 10: Code organization guidance..."
+
+output=$(run_claude "In subagent-driven-development, what code organization rules should the implementer follow for file responsibilities and large files?" 30)
+
+if assert_contains "$output" "one clear responsibility\|well-defined interface\|well defined interface\|focused file" "Mentions single responsibility"; then
+    : # pass
+else
+    exit 1
+fi
+
+if assert_contains "$output" "large\|growing\|tangled\|concern" "Mentions large-file handling"; then
+    : # pass
+else
+    exit 1
+fi
+
+echo ""
+
+# Test 11: Verify architecture/doc sync guidance
+echo "Test 11: Architecture documentation sync..."
+
+output=$(run_claude "If implementation in subagent-driven-development changes architecture or interfaces, should the agent silently diverge from the docs, or update/report the relevant docs?" 30)
+
+if assert_contains "$output" "update.*doc\|update.*spec\|update.*plan\|report.*concern\|ask" "Mentions doc sync or escalation"; then
+    : # pass
+else
+    exit 1
+fi
+
+if assert_not_contains "$output" "silently diverge\|ignore.*doc" "Doesn't allow silent drift"; then
+    : # pass
+else
+    exit 1
+fi
+
+echo ""
+
 echo "=== All subagent-driven-development skill tests passed ==="

@@ -97,6 +97,7 @@ digraph brainstorming {
 - For each unit, you should be able to answer: what does it do, how do you use it, and what does it depend on?
 - Can someone understand what a unit does without reading its internals? Can you change the internals without breaking consumers? If not, the boundaries need work.
 - Smaller, well-bounded units are also easier for you to work with - you reason better about code you can hold in context at once, and your edits are more reliable when files are focused. When a file grows large, that's often a signal that it's doing too much.
+- Make important architecture decisions explicit in the spec. Don't leave component boundaries, interface contracts, or data-flow assumptions only in chat.
 
 **Working in existing codebases:**
 
@@ -110,8 +111,10 @@ digraph brainstorming {
 
 - Write the validated design (spec) to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
   - (User preferences for spec location override this default)
+- Record the architecture decisions that matter for implementation and maintenance: major units, file/module responsibilities, interfaces, data flow, and constraints
 - Use elements-of-style:writing-clearly-and-concisely skill if available
 - Commit the design document to git
+- If the agreed architecture changes later, update the written spec before the work is considered complete
 
 **Spec Self-Review:**
 After writing the spec document, look at it with fresh eyes:
@@ -120,6 +123,7 @@ After writing the spec document, look at it with fresh eyes:
 2. **Internal consistency:** Do any sections contradict each other? Does the architecture match the feature descriptions?
 3. **Scope check:** Is this focused enough for a single implementation plan, or does it need decomposition?
 4. **Ambiguity check:** Could any requirement be interpreted two different ways? If so, pick one and make it explicit.
+5. **Architecture capture:** Are the important boundaries, responsibilities, and interfaces written down clearly enough that implementation can stay aligned without guessing?
 
 Fix any issues inline. No need to re-review — just fix and move on.
 

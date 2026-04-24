@@ -45,6 +45,7 @@ Use Task tool with superpowers:code-reviewer type, fill template at `code-review
 - Fix Important issues before proceeding
 - Note Minor issues for later
 - Push back if reviewer is wrong (with reasoning)
+- Treat missing documentation for architecture or interface changes as a real issue, not a nice-to-have
 
 ## Example
 

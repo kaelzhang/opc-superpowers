@@ -30,6 +30,7 @@ Before defining tasks, map out which files will be created or modified and what 
 - You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.
 - Files that change together should live together. Split by responsibility, not by technical layer.
 - In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.
+- If a change affects architecture, interfaces, or major behavior described in docs, include explicit documentation update steps in the plan. Do not assume docs will be fixed later.
 
 This structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.
 
@@ -69,6 +70,7 @@ This structure informs the task decomposition. Each task should produce self-con
 - Create: `exact/path/to/file.py`
 - Modify: `exact/path/to/existing.py:123-145`
 - Test: `tests/exact/path/to/test.py`
+- Docs: `docs/path/to/spec-or-readme.md` (when architecture, interfaces, or externally described behavior changes)
 
 - [ ] **Step 1: Write the failing test**
 
@@ -117,6 +119,7 @@ Every step must contain the actual content an engineer needs. These are **plan f
 - Exact file paths always
 - Complete code in every step — if a step changes code, show the code
 - Exact commands with expected output
+- Include documentation update steps whenever architecture or interfaces change
 - DRY, YAGNI, TDD, frequent commits
 
 ## Self-Review
@@ -128,6 +131,8 @@ After writing the complete plan, look at the spec with fresh eyes and check the 
 **2. Placeholder scan:** Search your plan for red flags — any of the patterns from the "No Placeholders" section above. Fix them.
 
 **3. Type consistency:** Do the types, method signatures, and property names you used in later tasks match what you defined in earlier tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
+
+**4. Documentation sync:** If any task changes architecture, boundaries, interfaces, or externally described behavior, does that task also update the relevant spec, plan, README, or supporting docs?
 
 If you find issues, fix them inline. No need to re-review — just fix and move on. If you find a spec requirement with no task, add the task.
 

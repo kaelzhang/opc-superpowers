@@ -24,6 +24,10 @@ If any of these checks fail, do not proceed. Explain why and what needs to chang
 
 **Every commit must be focused.** Stage only files related to the current task. Leave unrelated local changes untouched.
 
+**Architectural changes must keep code and documentation in sync.** If a change affects architecture, boundaries, interfaces, data flow, or externally described behavior, update the relevant spec, plan, and supporting docs in the same task before committing.
+
+**Keep file boundaries explicit.** Prefer smaller, focused files with one clear responsibility and a well-defined interface. If a file is growing large or taking on multiple responsibilities, split the work in the plan or record the concern before adding more behavior.
+
 **No PR process.** Do not read or fill the PR template, search for existing PRs, prepare PR text, or create PRs.
 
 **No default push.** Do not run `git push` unless your human partner explicitly asks you to publish the current branch.
@@ -85,5 +89,7 @@ Before proposing changes to skill design, workflow philosophy, or architecture, 
 - Do not create branches, worktrees, or PRs
 - Do not push unless explicitly requested
 - One problem per commit
+- Keep architecture and docs in sync
+- Keep files focused and responsibilities clear
 - Test on at least one harness when behavior changes
 - Describe the problem you solved, not just what you changed

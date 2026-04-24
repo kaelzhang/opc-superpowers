@@ -38,6 +38,7 @@ git diff {BASE_SHA}..{HEAD_SHA}
 
 **Architecture:**
 - Sound design decisions?
+- File and module responsibilities still clear?
 - Scalability considerations?
 - Performance implications?
 - Security concerns?
@@ -52,12 +53,14 @@ git diff {BASE_SHA}..{HEAD_SHA}
 - All plan requirements met?
 - Implementation matches spec?
 - No scope creep?
+- Architecture changes documented in spec/plan/docs?
 - Breaking changes documented?
 
 **Production Readiness:**
 - Migration strategy (if schema changes)?
 - Backward compatibility considered?
 - Documentation complete?
+- Documentation matches the implemented architecture and interfaces?
 - No obvious bugs?
 
 ## Output Format

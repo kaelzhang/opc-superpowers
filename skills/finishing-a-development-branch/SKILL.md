@@ -70,6 +70,7 @@ Identify which files belong to the completed task.
 - Leave unrelated user changes unstaged.
 - If ownership is unclear, ask before staging.
 - If there are no changes, report that there is nothing to commit.
+- If architecture, boundaries, interfaces, or externally described behavior changed, stage the corresponding spec/plan/doc updates too. Do not finalize with architecture drift between code and docs.
 
 ### Step 4: Commit Locally
 
@@ -116,6 +117,10 @@ No push was performed.
 - **Problem:** Existing local work becomes part of the wrong commit.
 - **Fix:** Inspect `git status` and stage only task-related files.
 
+**Undocumented architecture changes**
+- **Problem:** Code no longer matches the recorded design or interface expectations.
+- **Fix:** Update the relevant spec, plan, README, or supporting docs before committing.
+
 **Skipping test verification**
 - **Problem:** Commits broken code.
 - **Fix:** Always verify tests before committing.
@@ -129,12 +134,14 @@ No push was performed.
 - Push without explicit request
 - Commit with failing tests
 - Stage unrelated changes
+- Leave architecture/documentation changes out of the commit when code changed the design
 - Delete or overwrite work without confirmation
 
 **Always:**
 - Finish on `main` or `master`
 - Verify tests before committing
 - Review diff before staging
+- Keep architecture docs in sync with implementation changes
 - Commit locally
 - Report that no branch, PR, or push was performed
 

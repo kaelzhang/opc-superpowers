@@ -47,12 +47,16 @@ Task tool (general-purpose):
     reliable when files are focused. Keep this in mind:
     - Follow the file structure defined in the plan
     - Each file should have one clear responsibility with a well-defined interface
+    - Do not pack multiple responsibilities into one file just to avoid creating or updating a focused module
     - If a file you're creating is growing beyond the plan's intent, stop and report
       it as DONE_WITH_CONCERNS — don't split files on your own without plan guidance
     - If an existing file you're modifying is already large or tangled, work carefully
       and note it as a concern in your report
     - In existing codebases, follow established patterns. Improve code you're touching
       the way a good developer would, but don't restructure things outside your task.
+    - If implementation changes architecture, boundaries, interfaces, or documented behavior,
+      update the relevant docs when the task requires it. If the plan/spec does not account
+      for that change, stop and ask rather than silently diverging from the docs.
 
     ## When You're in Over Your Head
 
@@ -84,11 +88,13 @@ Task tool (general-purpose):
     - Is this my best work?
     - Are names clear and accurate (match what things do, not how they work)?
     - Is the code clean and maintainable?
+    - Does each changed file still have one clear responsibility?
 
     **Discipline:**
     - Did I avoid overbuilding (YAGNI)?
     - Did I only build what was requested?
     - Did I follow existing patterns in the codebase?
+    - If architecture or interfaces changed, did I update or explicitly call out the needed docs?
 
     **Testing:**
     - Do tests actually verify behavior (not just mock behavior)?

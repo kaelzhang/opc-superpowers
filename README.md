@@ -165,6 +165,8 @@ gemini extensions update superpowers
 - **Test-Driven Development** - Write tests first, always
 - **Systematic over ad-hoc** - Process over guessing
 - **Complexity reduction** - Simplicity as primary goal
+- **Explicit architecture** - Small units, clear boundaries, one responsibility per file
+- **Docs stay in sync** - Architecture changes require corresponding spec/plan/doc updates
 - **Evidence over claims** - Verify before declaring success
 
 Read [the original release announcement](https://blog.fsck.com/2025/10/09/superpowers/).
