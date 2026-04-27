@@ -11,7 +11,7 @@ Load plan, review critically, execute all tasks, report when complete.
 
 **Announce at start:** "I'm using the executing-plans skill to implement this plan."
 
-**Note:** Tell your human partner that Superpowers works much better with access to subagents. The quality of its work will be significantly higher if run on a platform with subagent support (such as Claude Code or Codex). If subagents are available, use superpowers:subagent-driven-development instead of this skill.
+**Note:** Tell your human partner that opc-superpowers works much better with access to subagents. The quality of its work will be significantly higher if run on a platform with subagent support (such as Claude Code or Codex). If subagents are available, use opc-superpowers:subagent-driven-development instead of this skill.
 
 ## The Process
 
@@ -33,7 +33,7 @@ For each task:
 
 After all tasks complete and verified:
 - Announce: "I'm using the finishing-a-development-branch skill to complete this work."
-- **REQUIRED SUB-SKILL:** Use superpowers:finishing-a-development-branch
+- **REQUIRED SUB-SKILL:** Use opc-superpowers:finishing-a-development-branch
 - Follow that skill to verify tests, review the diff, and commit locally on main/master
 
 ## When to Stop and Ask for Help
@@ -67,6 +67,6 @@ After all tasks complete and verified:
 ## Integration
 
 **Required workflow skills:**
-- **superpowers:using-git-worktrees** - REQUIRED: Verify current main/master workspace before starting
-- **superpowers:writing-plans** - Creates the plan this skill executes
-- **superpowers:finishing-a-development-branch** - Verify and commit local main/master work after all tasks
+- **opc-superpowers:using-git-worktrees** - REQUIRED: Verify current main/master workspace before starting
+- **opc-superpowers:writing-plans** - Creates the plan this skill executes
+- **opc-superpowers:finishing-a-development-branch** - Verify and commit local main/master work after all tasks

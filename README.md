@@ -2,9 +2,9 @@ A forked version for one-person companies, no worktree, no branch (always on mas
 
 ----
 
-# Superpowers
+# opc-superpowers
 
-Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
+opc-superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
 
 ## How it works
 
@@ -16,12 +16,12 @@ After you've signed off on the design, your agent puts together an implementatio
 
 Next up, once you say "go", it launches a *subagent-driven-development* process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for Claude to be able to work autonomously for a couple hours at a time without deviating from the plan you put together.
 
-There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
+There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has opc-superpowers.
 
 
 ## Sponsorship
 
-If Superpowers has helped you do stuff that makes money and you are so inclined, I'd greatly appreciate it if you'd consider [sponsoring my opensource work](https://github.com/sponsors/obra).
+If opc-superpowers has helped you do stuff that makes money and you are so inclined, I'd greatly appreciate it if you'd consider [sponsoring my opensource work](https://github.com/sponsors/obra).
 
 Thanks!
 
@@ -32,92 +32,63 @@ Thanks!
 
 **Note:** Installation differs by platform.
 
-### Claude Code Official Marketplace
+### Claude Code
 
-Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers)
-
-Install the plugin from Anthropic's official marketplace:
-
-```bash
-/plugin install superpowers@claude-plugins-official
-```
-
-### Claude Code (Superpowers Marketplace)
-
-The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.
+This fork ships its own Claude Code marketplace metadata in `.claude-plugin/marketplace.json`.
 
 In Claude Code, register the marketplace first:
 
 ```bash
-/plugin marketplace add obra/superpowers-marketplace
+/plugin marketplace add kaelzhang/opc-superpowers
 ```
 
 Then install the plugin from this marketplace:
 
 ```bash
-/plugin install superpowers@superpowers-marketplace
+/plugin install opc-superpowers@opc-superpowers-dev
 ```
 
-### OpenAI Codex CLI
+### OpenAI Codex
 
-- Open plugin search interface
+Tell Codex:
 
-```bash
-/plugins
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/kaelzhang/opc-superpowers/refs/heads/main/.codex/INSTALL.md
 ```
 
-Search for Superpowers
+**Detailed docs:** [docs/README.codex.md](/Users/kael/Codes/ost/tools/opc-superpowers/docs/README.codex.md)
 
-```bash
-superpowers
-```
+### Cursor
 
-Select `Install Plugin`
-
-### OpenAI Codex App
-
-- In the Codex app, click on Plugins in the sidebar.
-- You should see `Superpowers` in the Coding section.
-- Click the `+` next to Superpowers and follow the prompts.
-
-
-### Cursor (via Plugin Marketplace)
-
-In Cursor Agent chat, install from marketplace:
-
-```text
-/add-plugin superpowers
-```
-
-or search for "superpowers" in the plugin marketplace.
+Use the local manifest at `.cursor-plugin/plugin.json` with your Cursor plugin import flow. This fork does not assume a public Cursor marketplace listing.
 
 ### OpenCode
 
 Tell OpenCode:
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/kaelzhang/opc-superpowers/refs/heads/main/.opencode/INSTALL.md
 ```
 
-**Detailed docs:** [docs/README.opencode.md](docs/README.opencode.md)
+**Detailed docs:** [docs/README.opencode.md](/Users/kael/Codes/ost/tools/opc-superpowers/docs/README.opencode.md)
 
 ### GitHub Copilot CLI
 
 ```bash
-copilot plugin marketplace add obra/superpowers-marketplace
-copilot plugin install superpowers@superpowers-marketplace
+copilot plugin marketplace add kaelzhang/opc-superpowers
+copilot plugin install opc-superpowers@opc-superpowers-dev
 ```
 
 ### Gemini CLI
 
 ```bash
-gemini extensions install https://github.com/obra/superpowers
+gemini extensions install https://github.com/kaelzhang/opc-superpowers
 ```
 
 To update:
 
 ```bash
-gemini extensions update superpowers
+gemini extensions update opc-superpowers
 ```
 
 ## The Basic Workflow
@@ -162,7 +133,7 @@ gemini extensions update superpowers
 
 **Meta**
 - **writing-skills** - Create new skills following best practices (includes testing methodology)
-- **using-superpowers** - Introduction to the skills system
+- **using-opc-superpowers** - Introduction to the skills system
 
 ## Philosophy
 
@@ -173,11 +144,11 @@ gemini extensions update superpowers
 - **Docs stay in sync** - Architecture changes require corresponding spec/plan/doc updates
 - **Evidence over claims** - Verify before declaring success
 
-Read [the original release announcement](https://blog.fsck.com/2025/10/09/superpowers/).
+Read [the original Superpowers release announcement](https://blog.fsck.com/2025/10/09/superpowers/).
 
 ## Contributing
 
-The general contribution process for Superpowers is below. Keep in mind that we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.
+The general contribution process for opc-superpowers is below. Keep in mind that we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.
 
 1. Work directly on `main` or `master`
 2. Follow the `writing-skills` skill for creating and testing new and modified skills
@@ -188,7 +159,7 @@ See `skills/writing-skills/SKILL.md` for the complete guide.
 
 ## Updating
 
-Superpowers updates are somewhat coding-agent dependent, but are often automatic.
+opc-superpowers updates are somewhat coding-agent dependent, but are often automatic.
 
 ## License
 
@@ -196,8 +167,8 @@ MIT License - see LICENSE file for details
 
 ## Community
 
-Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of the folks at [Prime Radiant](https://primeradiant.com).
+opc-superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of the folks at [Prime Radiant](https://primeradiant.com).
 
-- **Discord**: [Join us](https://discord.gg/35wsABTejz) for community support, questions, and sharing what you're building with Superpowers
-- **Issues**: https://github.com/obra/superpowers/issues
-- **Release announcements**: [Sign up](https://primeradiant.com/superpowers/) to get notified about new versions
+- **Discord**: [Join us](https://discord.gg/35wsABTejz) for community support, questions, and sharing what you're building with opc-superpowers
+- **Issues**: https://github.com/kaelzhang/opc-superpowers/issues
+- **Releases**: [Watch GitHub releases](https://github.com/kaelzhang/opc-superpowers/releases)
