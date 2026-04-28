@@ -61,12 +61,14 @@ After all tasks complete and verified:
 - Reference skills when plan says to
 - Stop when blocked, don't guess
 - Work directly on main/master
-- Do not create branches, worktrees, or PRs
+- Do not create branches, secondary checkouts, or PRs
 - Do not push without explicit user request
 
 ## Integration
 
 **Required workflow skills:**
-- **opc-superpowers:using-git-worktrees** - REQUIRED: Verify current main/master workspace before starting
 - **opc-superpowers:writing-plans** - Creates the plan this skill executes
 - **opc-superpowers:finishing-a-development-branch** - Verify and commit local main/master work after all tasks
+
+**Required startup check:**
+- Verify the current main/master workspace before starting

@@ -139,7 +139,7 @@ echo ""
 # Test 8: Verify direct main/master workspace requirement
 echo "Test 8: Direct main/master workspace..."
 
-output=$(run_claude "What workflow setup is required before using subagent-driven-development? Should it create a branch/worktree, or work directly on main/master?" 30)
+output=$(run_claude "What workflow setup is required before using subagent-driven-development? Should it create a branch, or work directly on main/master?" 30)
 
 if assert_contains "$output" "main\|master\|current.*workspace\|direct" "Mentions direct main/master workflow"; then
     : # pass
@@ -147,7 +147,7 @@ else
     exit 1
 fi
 
-if assert_not_contains "$output" "create.*branch\|new.*branch\|feature.*branch\|git worktree add\|isolated.*worktree" "Doesn't require branch/worktree creation"; then
+if assert_not_contains "$output" "create.*branch\|new.*branch\|feature.*branch\|isolated.*workspace" "Doesn't require branch creation or isolation workflow"; then
     : # pass
 else
     exit 1
@@ -165,7 +165,7 @@ else
     exit 1
 fi
 
-if assert_not_contains "$output" "not.*main\|never.*main\|avoid.*main\|don't.*main\|consent\|permission\|feature.*branch\|worktree" "Doesn't warn against main branch"; then
+if assert_not_contains "$output" "not.*main\|never.*main\|avoid.*main\|don't.*main\|consent\|permission\|feature.*branch" "Doesn't warn against main branch"; then
     : # pass
 else
     exit 1

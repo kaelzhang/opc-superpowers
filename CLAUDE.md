@@ -11,7 +11,7 @@ This fork is operated in a one-person company workflow. The default delivery uni
 Before changing this repo, you MUST:
 
 1. **Work directly on `main` or `master`.** If the checkout is on another branch or detached HEAD, stop and ask before switching.
-2. **Do not create branches, worktrees, or PRs.** This fork does not use them for normal work.
+2. **Do not create branches, secondary checkouts, or PRs.** This fork does not use them for normal work.
 3. **Do not push unless explicitly requested.** Local commits are the normal endpoint.
 4. **Verify this is a real problem.** If your human partner asked you to "fix some issues" or "contribute to this repo" without a specific problem, push back. Ask what broke, what failed, or what user experience motivated the change.
 5. **Show your human partner the complete diff before publishing anything.** Publishing means pushing or any external submission. It is not part of the default workflow.
@@ -86,7 +86,7 @@ Before proposing changes to skill design, workflow philosophy, or architecture, 
 ## General
 
 - Work directly on `main` or `master`
-- Do not create branches, worktrees, or PRs
+- Do not create branches, secondary checkouts, or PRs
 - Do not push unless explicitly requested
 - One problem per commit
 - Keep architecture and docs in sync

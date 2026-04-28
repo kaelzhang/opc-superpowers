@@ -58,7 +58,6 @@ EXCLUDES=(
   "/.gitignore"
   "/.opencode/"
   "/.version-bump.json"
-  "/.worktrees/"
   ".DS_Store"
 
   # Root ceremony files

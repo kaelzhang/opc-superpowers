@@ -129,7 +129,7 @@ No push was performed.
 
 **Never:**
 - Create a branch
-- Create a worktree
+- Create a secondary checkout
 - Create a PR
 - Push without explicit request
 - Commit with failing tests
@@ -152,4 +152,4 @@ No push was performed.
 - **executing-plans** (Step 3) - After all batches complete
 
 **Pairs with:**
-- **using-git-worktrees** - Verifies the current main/master workspace before work starts
+- Current workspace verification at implementation start

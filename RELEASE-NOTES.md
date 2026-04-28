@@ -36,8 +36,8 @@ The subagent review loop (dispatching a fresh agent to review plans/specs) doubl
 ### Codex App Compatibility
 
 - **codex-tools** — added named agent dispatch mapping documenting how to translate Claude Code's named agent types to Codex's `spawn_agent` with worker roles (PR #647 by @arittr)
-- **codex-tools** — added environment detection and Codex App finishing sections for worktree-aware skills (by @arittr)
-- **Design spec** — added Codex App compatibility design spec (PRI-823) covering read-only environment detection, worktree-safe skill behavior, and sandbox fallback patterns (by @arittr)
+- **codex-tools** — added environment detection and Codex App finishing sections for single-workspace skills (by @arittr)
+- **Design spec** — added Codex App compatibility design spec (PRI-823) covering read-only environment detection, single-workspace skill behavior, and sandbox fallback patterns (by @arittr)
 
 ## v5.0.5 (2026-03-17)
 
@@ -385,7 +385,7 @@ Updated `~/.codex/skills/` reference (deprecated) to `~/.agents/skills/` for nat
 
 **Worktree isolation now required before implementation**
 
-Added `using-git-worktrees` as a required skill for both `subagent-driven-development` and `executing-plans`. Implementation workflows now explicitly require setting up an isolated worktree before starting work, preventing accidental work directly on main.
+Added explicit current-workspace verification requirements to both `subagent-driven-development` and `executing-plans`. Implementation workflows now explicitly require checking the active main/master workspace before starting work.
 
 **Main branch protection softened to require explicit consent**
 
@@ -401,7 +401,7 @@ Improved documentation of how Codex tools map to Claude Code equivalents for sub
 
 ### Tests
 
-- Added worktree requirement test for subagent-driven-development
+- Added workspace-verification test for subagent-driven-development
 - Added main branch red flag warning test
 - Fixed case sensitivity in skill recognition test assertions
 
@@ -757,7 +757,7 @@ These changes address observed agent behavior where they rationalize around skil
 - Added Phase 4: Design Documentation to brainstorming skill
 - Design documents now written to `docs/plans/YYYY-MM-DD-<topic>-design.md` before implementation
 - Restores functionality from original brainstorming command that was lost during skill conversion
-- Documents written before worktree setup and implementation planning
+- Documents written before workspace verification and implementation planning
 - Tested with subagent to verify compliance under time pressure
 
 ### Breaking Changes
@@ -788,7 +788,7 @@ These changes address observed agent behavior where they rationalize around skil
 
 **Skill names standardized to lowercase**
 - All skill frontmatter `name:` fields now use lowercase kebab-case matching directory names
-- Examples: `brainstorming`, `test-driven-development`, `using-git-worktrees`
+- Examples: `brainstorming`, `test-driven-development`, `workspace verification`
 - All skill announcements and cross-references updated to lowercase format
 - This ensures consistent naming across directory names, frontmatter, and documentation
 

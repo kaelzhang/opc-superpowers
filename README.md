@@ -1,4 +1,4 @@
-A forked version for one-person companies, no worktree, no branch (always on master), no push.
+A forked version for one-person companies: single workspace, no branch, always on main or master, no push by default.
 
 ----
 
@@ -95,7 +95,7 @@ gemini extensions update opc-superpowers
 
 1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
 
-2. **using-git-worktrees** - Activates after design approval. Verifies the current `main`/`master` workspace, runs project setup, verifies clean test baseline.
+2. **workspace verification** - Happens at implementation start. Verify the current `main`/`master` workspace, run project setup if needed, and confirm a clean baseline before editing.
 
 3. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
 
@@ -127,7 +127,6 @@ gemini extensions update opc-superpowers
 - **dispatching-parallel-agents** - Concurrent subagent workflows
 - **requesting-code-review** - Pre-review checklist
 - **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Current `main`/`master` workspace verification
 - **finishing-a-development-branch** - Local commit completion workflow
 - **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
 

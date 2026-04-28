@@ -234,7 +234,7 @@ Done!
 ## Red Flags
 
 **Never:**
-- Create branches, worktrees, or PRs for the default single-owner workflow
+- Create branches, secondary checkouts, or PRs for the default single-owner workflow
 - Push without explicit user request
 - Skip reviews (spec compliance OR code quality)
 - Proceed with unfixed issues
@@ -266,10 +266,12 @@ Done!
 ## Integration
 
 **Required workflow skills:**
-- **opc-superpowers:using-git-worktrees** - REQUIRED: Verify current main/master workspace before starting
 - **opc-superpowers:writing-plans** - Creates the plan this skill executes
 - **opc-superpowers:requesting-code-review** - Code review template for reviewer subagents
 - **opc-superpowers:finishing-a-development-branch** - Verify and commit local main/master work after all tasks
+
+**Required startup check:**
+- Verify the current main/master workspace before starting
 
 **Subagents should use:**
 - **opc-superpowers:test-driven-development** - Subagents follow TDD for each task

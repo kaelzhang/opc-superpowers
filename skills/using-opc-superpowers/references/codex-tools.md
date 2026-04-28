@@ -82,11 +82,10 @@ BRANCH=$(git branch --show-current)
 ```
 
 - `BRANCH` is `main` or `master` → continue with the single-owner workflow
-- `GIT_DIR != GIT_COMMON` → already in a linked worktree; do not create another
 - `BRANCH` empty → detached HEAD; ask how to return to main/master before finishing
 
-See `using-git-worktrees` and `finishing-a-development-branch` for how each
-skill uses these signals.
+See `finishing-a-development-branch` and the implementation workflow docs for
+how these signals are used.
 
 ## Codex App Finishing
 

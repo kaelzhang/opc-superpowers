@@ -6,7 +6,7 @@
 
 **Architecture:** Extract common skill discovery/parsing logic into `lib/skills-core.js`, refactor Codex to use it, then build OpenCode plugin using their native plugin API with custom tools and session hooks.
 
-**Tech Stack:** Node.js, JavaScript, OpenCode Plugin API, Git worktrees
+**Tech Stack:** Node.js, JavaScript, OpenCode Plugin API, Git
 
 ---
 
@@ -475,7 +475,7 @@ const personalSkillsDir = path.join(homeDir, '.config/opencode/skills');
 /**
  * OpenCode plugin entry point
  */
-export const opcSuperpowersPlugin = async ({ project, client, $, directory, worktree }) => {
+export const opcSuperpowersPlugin = async ({ project, client, $, directory }) => {
   return {
     // Custom tools and hooks will go here
   };
@@ -506,7 +506,7 @@ git commit -m "feat: create opencode plugin scaffold"
 Replace the plugin return statement with:
 
 ```javascript
-export const opcSuperpowersPlugin = async ({ project, client, $, directory, worktree }) => {
+export const opcSuperpowersPlugin = async ({ project, client, $, directory }) => {
   // Import zod for schema validation
   const { z } = await import('zod');
 

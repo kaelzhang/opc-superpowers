@@ -260,7 +260,7 @@ opc-superpowers/
 
 ## Next Steps
 
-1. **Create isolated workspace** (using git worktrees)
+1. **Verify current workspace state**
    - Branch: `feature/opencode-support`
 
 2. **Follow TDD where applicable**
